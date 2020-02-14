@@ -1,7 +1,8 @@
 // JavaScript source code
 var counter = 2;
 
-function start() {
+//renders the buttons and text in the stemwijzer
+function main() {
     var content_container = document.getElementById("content_container");
     var button_container = document.getElementById("button_container");
 
@@ -29,4 +30,5 @@ function start() {
 
 }
 
-start();
+start();    
+main();
