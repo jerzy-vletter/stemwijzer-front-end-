@@ -1,5 +1,5 @@
 // JavaScript source code
-var counter = 2;
+var counter = 0;
 
 //renders the buttons and text in the stemwijzer
 function main() {
@@ -30,5 +30,4 @@ function main() {
 
 }
 
-start();    
 main();
