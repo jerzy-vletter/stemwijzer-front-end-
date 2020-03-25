@@ -22,7 +22,7 @@
     transform: translateY(-50%);
 }
 
-.btn-answer {
+#but1, #but2, #but3, #but4 {
     display: inline-block;
     background-color: black;
     height: 60px;
