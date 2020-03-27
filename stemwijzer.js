@@ -1,6 +1,6 @@
 // JavaScript source code
 var counter = 0;
-var awnsers = [];
+var awnsers = []; //this is the awnser array, console.log this awnsers to check if the awnsers are in there
 
 //renders the buttons and text in the stemwijzer
 function main() {
@@ -36,18 +36,22 @@ function main() {
     button_container.appendChild(but4);
         
     but1.addEventListener("click", function () {
+        awnsers.push("pro");
         rendercheck();
     });
 
     but2.addEventListener("click", function () {
+        awnsers.push("none");
         rendercheck();
     });
 
     but3.addEventListener("click", function () {
+        awnsers.push("contra");
         rendercheck();
     });
 
     but4.addEventListener("click", function () {
+        awnsers.pop();
         if (counter == 0) { return; }
         counter--;
         render();
@@ -59,7 +63,7 @@ main();
 
 function rendercheck() {
     //end is subjects.length-1
-    if (counter == 3) {
+    if (counter == subjects.length-1) {
         question_container.style.display = "none";
         return;
     }
