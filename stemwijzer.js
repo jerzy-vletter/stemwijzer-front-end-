@@ -2,12 +2,42 @@
 var counter = 0;
 var awnsers = []; //this is the awnser array, console.log this awnsers to check if the awnsers are in there
 
-//renders the buttons and text in the stemwijzer
-function main() {
-    question_container = document.getElementById("question_container");
-    var content_container = document.getElementById("content_container");
-    var button_container = document.getElementById("button_container");
-    
+//getting all the containers into javascript
+var startbutton_container = document.getElementById("startbutton_container")
+var question_container = document.getElementById("question_container");
+var content_container = document.getElementById("content_container");
+var button_container = document.getElementById("button_container");
+
+//makes the start page appear
+function toggleStart() {
+
+    question_container.style.display = "none";
+    start_container.style.display = "block";
+    start();
+}
+
+//here is where the startpage code begins
+function start() {
+
+    var startbut = document.createElement("button");
+    startbut.innerHTML = "start";
+    startbut.setAttribute("id", "startbut");
+    startbutton_container.appendChild(startbut);
+    startbut.addEventListener("click", function () {
+        toggleQuestion();
+    });
+
+}
+
+//makes the question container appear
+function toggleQuestion() {
+
+    question_container.style.display = "block";
+    start_container.style.display = "none";
+}
+
+//here the question part of the stemwijzer begins
+function question() {
 
     h1 = document.createElement("h1");
     p = document.createElement("p");
@@ -26,7 +56,7 @@ function main() {
     but1.setAttribute("id", "but1");
     but2.setAttribute("id", "but2");
     but3.setAttribute("id", "but3");
-    but3.setAttribute("id", "but4");
+    but4.setAttribute("id", "but4");
 
     content_container.appendChild(h1);
     content_container.appendChild(p);
@@ -57,7 +87,7 @@ function main() {
         render();
     });
 }
-main();
+question();
 
 
 
@@ -65,6 +95,7 @@ function rendercheck() {
     //end is subjects.length-1
     if (counter == subjects.length-1) {
         question_container.style.display = "none";
+        end_container.style.display = "block"
         return;
     }
     counter++;
