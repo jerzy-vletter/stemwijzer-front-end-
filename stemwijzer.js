@@ -16,6 +16,14 @@ function toggleStart() {
     start();
 }
 
+//makes the question container appear
+function toggleQuestion() {
+
+    question_container.style.display = "block";
+    start_container.style.display = "none";
+}
+
+
 //here is where the startpage code begins
 function start() {
 
@@ -29,12 +37,6 @@ function start() {
 
 }
 
-//makes the question container appear
-function toggleQuestion() {
-
-    question_container.style.display = "block";
-    start_container.style.display = "none";
-}
 
 //here the question part of the stemwijzer begins
 function question() {
@@ -45,18 +47,22 @@ function question() {
     var but2 = document.createElement("button");
     var but3 = document.createElement("button");
     var but4 = document.createElement("button");
+    var but5 = document.createElement("button");
+
 
     h1.innerHTML = subjects[counter].title;
     p.innerHTML = subjects[counter].statement;
     but1.innerHTML = "eens";
     but2.innerHTML = "geen mening";
     but3.innerHTML = "oneens";
-    but4.innerHTML = "<-"
+    but4.innerHTML = "<-";
+    but5.innerHTML = "skip";
 
     but1.setAttribute("id", "but1");
     but2.setAttribute("id", "but2");
     but3.setAttribute("id", "but3");
     but4.setAttribute("id", "but4");
+    but5.setAttribute("id", "but5");
 
     content_container.appendChild(h1);
     content_container.appendChild(p);
@@ -64,6 +70,8 @@ function question() {
     button_container.appendChild(but2);
     button_container.appendChild(but3);
     button_container.appendChild(but4);
+    button_container.appendChild(but5);
+
         
     but1.addEventListener("click", function () {
         awnsers.push("pro");
@@ -86,10 +94,19 @@ function question() {
         counter--;
         render();
     });
+
+    but5.addEventListener("click", function () {
+        awnsers.push("skipped");
+        rendercheck();
+    });
 }
 question();
 
+function end() {
+    
 
+}
+end();
 
 function rendercheck() {
     //end is subjects.length-1
