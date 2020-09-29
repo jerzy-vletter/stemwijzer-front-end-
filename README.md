@@ -4,3 +4,6 @@
 -use the counter variable in stemwijzer.js to change your questions to avoid DRY CODE
 
 herstart met project op 10/9/2020
+
+
+29-9-2020 - merge had to happen to fix a bug where i could use my coding software to push a commit to github.F
