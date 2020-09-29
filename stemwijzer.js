@@ -103,16 +103,30 @@ function question() {
 question();
 
 function end() {
-    
+
+
+    // loops through the parties in subjects
+    // then takes the name and looks for it in the parties array
+    for (let i = 0; i < subjects.length; i++) {
+         // check for the part name then it looks for the name in the party array and if the name is found it ads a point to that party
+        for (let p = 0; p < subjects[i].parties.length - 1; p++) {
+            var party = parties.find(a => a.name == subjects[i].parties[p].name);
+            if (subjects[i].parties[p].position == awnsers[i]) {
+                party.score = party.score + 1;
+            }
+        }
+    }
+
 
 }
-end();
+
 
 function rendercheck() {
     //end is subjects.length-1
     if (counter == subjects.length-1) {
         question_container.style.display = "none";
         end_container.style.display = "block"
+        end();
         return;
     }
     counter++;
