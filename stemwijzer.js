@@ -103,6 +103,21 @@ function question() {
 question();
 
 function end() {
+    //assignes a 0 score to all parties to prevent the score from becoming null (work in progress: if active it gives a NaN output.)
+    /*for (c = 0; c <= parties.length - 1; c++) {
+        console.log(parties[c]);
+        parties[c].score = 0;
+    }*/
+
+    console.log("start_end_function")
+
+
+    parties.forEach(party => {
+       
+        party.score = 0;
+        console.log(party);
+    });
+    console.log(parties);
 
 
     // loops through the parties in subjects
