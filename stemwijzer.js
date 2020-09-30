@@ -1,12 +1,13 @@
 // JavaScript source code
 var counter = 0;
-var awnsers = []; //this is the awnser array, console.log this awnsers to check if the awnsers are in there
+var answer = []; //this is the answer array, console.log this awnsers to check if the awnsers are in there
 
 //getting all the containers into javascript
 var startbutton_container = document.getElementById("startbutton_container")
 var question_container = document.getElementById("question_container");
 var content_container = document.getElementById("content_container");
 var button_container = document.getElementById("button_container");
+var endbutton_container = document.getElementById("endbutton_container");
 
 //makes the start page appear
 function toggleStart() {
@@ -74,50 +75,40 @@ function question() {
 
         
     but1.addEventListener("click", function () {
-        awnsers.push("pro");
+        answer.push("pro");
         rendercheck();
     });
 
     but2.addEventListener("click", function () {
-        awnsers.push("none");
+        answer.push("none");
         rendercheck();
     });
 
     but3.addEventListener("click", function () {
-        awnsers.push("contra");
+        answer.push("contra");
         rendercheck();
     });
 
     but4.addEventListener("click", function () {
-        awnsers.pop();
+        answer.pop();
         if (counter == 0) { return; }
         counter--;
         render();
     });
 
     but5.addEventListener("click", function () {
-        awnsers.push("skipped");
+        answer.push("skipped");
         rendercheck();
     });
 }
 question();
 
 function end() {
+
     //assignes a 0 score to all parties to prevent the score from becoming null (work in progress: if active it gives a NaN output.)
-    /*for (c = 0; c <= parties.length - 1; c++) {
-        console.log(parties[c]);
-        parties[c].score = 0;
-    }*/
-
-    console.log("start_end_function")
-
-
     parties.forEach(party => {
-       
         party.score = 0;
-        console.log(party);
     });
-    console.log(parties);
 
 
     // loops through the parties in subjects
@@ -126,21 +117,41 @@ function end() {
          // check for the part name then it looks for the name in the party array and if the name is found it ads a point to that party
         for (let p = 0; p < subjects[i].parties.length - 1; p++) {
             var party = parties.find(a => a.name == subjects[i].parties[p].name);
-            if (subjects[i].parties[p].position == awnsers[i]) {
+            if (subjects[i].parties[p].position == answer[i]) {
                 party.score = party.score + 1;
             }
         }
     }
+    //put this in because i became bored with typing it in the console
+    console.log(parties);
 
+    //clears the endbutton container so no dublicate buttons get created when going back to the questions.
+    endbutton_container.innerHTML = "";
 
+    //return to questions button on the end page
+    var returnButton = document.createElement("button");
+    returnButton.innerHTML = "return to questions";
+    returnButton.setAttribute("id", "returnButton");
+    endbutton_container.appendChild(returnButton);
+
+    returnButton.addEventListener("click", function() {
+        returnToQuestions();
+    });
 }
 
+function returnToQuestions() {
+    question_container.style.display = "block";
+    end_container.style.display = "none";
+
+    //deletes the last answer in the answer array so you don't get extra answer
+    answer.pop();
+}
 
 function rendercheck() {
     //end is subjects.length-1
     if (counter == subjects.length-1) {
         question_container.style.display = "none";
-        end_container.style.display = "block"
+        end_container.style.display = "block";
         end();
         return;
     }
