@@ -7,6 +7,8 @@ var startbutton_container = document.getElementById("startbutton_container")
 var question_container = document.getElementById("question_container");
 var content_container = document.getElementById("content_container");
 var button_container = document.getElementById("button_container");
+var end_container = document.getElementById("end_container");
+var text_container = document.getElementById("text_container");
 var endbutton_container = document.getElementById("endbutton_container");
 
 //makes the start page appear
@@ -105,6 +107,7 @@ question();
 
 function end() {
 
+
     //assignes a 0 score to all parties to prevent the score from becoming null (work in progress: if active it gives a NaN output.)
     parties.forEach(party => {
         party.score = 0;
@@ -114,7 +117,8 @@ function end() {
     // loops through the parties in subjects
     // then takes the name and looks for it in the parties array
     for (let i = 0; i < subjects.length; i++) {
-         // check for the part name then it looks for the name in the party array and if the name is found it ads a point to that party
+         // looks for the name in the party array and if the name is found it ads a point to that party
+         // the (if) is a filter for the answer
         for (let p = 0; p < subjects[i].parties.length - 1; p++) {
             var party = parties.find(a => a.name == subjects[i].parties[p].name);
             if (subjects[i].parties[p].position == answer[i]) {
@@ -137,6 +141,28 @@ function end() {
     returnButton.addEventListener("click", function() {
         returnToQuestions();
     });
+
+    //pulls parties and the score and puts them shows them onto the end page 
+    for (z = 0; z < parties.length - 1; z++) {
+        var p = document.createElement("p");
+        var s = document.createElement("p");
+
+        p.innerHTML = parties[z].name;
+        s.innerHTML = parties[z].score;
+
+        p.setAttribute("class", "parties");
+        s.setAttribute("class", "score");
+
+        text_container.appendChild(p);
+        text_container.appendChild(s);
+
+        parties.sort(function (a, b) {
+            return b.score - a.score;
+        });
+
+        
+    }
+
 }
 
 function returnToQuestions() {
@@ -145,6 +171,8 @@ function returnToQuestions() {
 
     //deletes the last answer in the answer array so you don't get extra answer
     answer.pop();
+
+    text_container.innerHTML = "";
 }
 
 function rendercheck() {
