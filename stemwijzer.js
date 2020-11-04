@@ -1,26 +1,27 @@
 // JavaScript source code
 var counter = 0;
-var answer = []; //this is the answer array, console.log this awnsers to check if the awnsers are in there
+var answer = []; //this is the answer array, console.log this answers to check if the answer are in there
 
 //getting all the containers into javascript
-var startbutton_container = document.getElementById("startbutton_container")
-var question_container = document.getElementById("question_container");
-var content_container = document.getElementById("content_container");
-var button_container = document.getElementById("button_container");
-var end_container = document.getElementById("end_container");
-var text_container = document.getElementById("text_container");
-var endbutton_container = document.getElementById("endbutton_container");
-
+function getContainer() {
+    var startbutton_container = document.getElementById("startbutton_container")
+    var question_container = document.getElementById("question_container");
+    var content_container = document.getElementById("content_container");
+    var button_container = document.getElementById("button_container");
+    var end_container = document.getElementById("end_container");
+    var text_container = document.getElementById("text_container");
+    var endbutton_container = document.getElementById("endbutton_container");
+};
 //makes the start page appear
-function toggleStart() {
+function RenderStartPage() {
 
     question_container.style.display = "none";
     start_container.style.display = "block";
-    start();
+    startPage();
 }
 
 //makes the question container appear
-function toggleQuestion() {
+function renderQuestionPage() {
 
     question_container.style.display = "block";
     start_container.style.display = "none";
@@ -28,21 +29,26 @@ function toggleQuestion() {
 
 
 //here is where the startpage code begins
-function start() {
+function startPage() {
+    getContainer();
 
+    createStartButton();
+
+}
+
+function createStartButton() {
     var startbut = document.createElement("button");
     startbut.innerHTML = "start";
     startbut.setAttribute("id", "startbut");
     startbutton_container.appendChild(startbut);
     startbut.addEventListener("click", function () {
-        toggleQuestion();
+        renderQuestionPage();
     });
-
 }
 
-
 //here the question part of the stemwijzer begins
-function question() {
+function questionPage() {
+    getContainer();
 
     h1 = document.createElement("h1");
     p = document.createElement("p");
@@ -51,7 +57,6 @@ function question() {
     var but3 = document.createElement("button");
     var but4 = document.createElement("button");
     var but5 = document.createElement("button");
-
 
     h1.innerHTML = subjects[counter].title;
     p.innerHTML = subjects[counter].statement;
@@ -75,74 +80,63 @@ function question() {
     button_container.appendChild(but4);
     button_container.appendChild(but5);
 
-        
+
     but1.addEventListener("click", function () {
         answer.push("pro");
-        rendercheck();
+        renderResults();
     });
 
     but2.addEventListener("click", function () {
         answer.push("none");
-        rendercheck();
+        renderResults();
     });
 
     but3.addEventListener("click", function () {
         answer.push("contra");
-        rendercheck();
+        renderResults();
     });
 
     but4.addEventListener("click", function () {
         answer.pop();
         if (counter == 0) { return; }
         counter--;
-        render();
+        renderText();
     });
 
     but5.addEventListener("click", function () {
         answer.push("skipped");
-        rendercheck();
+        renderResults();
     });
 }
-question();
+questionPage();
 
-function end() {
+function ResultPage() {
+    getContainer();
 
+    resetResults();
 
-    //assignes a 0 score to all parties to prevent the score from becoming null (work in progress: if active it gives a NaN output.)
-    parties.forEach(party => {
-        party.score = 0;
-    });
-
-
-    // loops through the parties in subjects
-    // then takes the name and looks for it in the parties array
-    for (let i = 0; i < subjects.length; i++) {
-         // looks for the name in the party array and if the name is found it ads a point to that party
-         // the (if) is a filter for the answer
-        for (let p = 0; p < subjects[i].parties.length - 1; p++) {
-            var party = parties.find(a => a.name == subjects[i].parties[p].name);
-            if (subjects[i].parties[p].position == answer[i]) {
-                party.score = party.score + 1;
-            }
-        }
-    }
+    scoreCalculation();
+    
     //put this in because i became bored with typing it in the console
     console.log(parties);
 
     //clears the endbutton container so no dublicate buttons get created when going back to the questions.
     endbutton_container.innerHTML = "";
 
-    //return to questions button on the end page
-    var returnButton = document.createElement("button");
-    returnButton.innerHTML = "return to questions";
-    returnButton.setAttribute("id", "returnButton");
-    endbutton_container.appendChild(returnButton);
+    createReturnButton();
 
-    returnButton.addEventListener("click", function() {
-        returnToQuestions();
+    getResults();
+}
+
+function resetResults() {
+    //assignes a 0 score to all parties to prevent the score from becoming null (work in progress: if active it gives a NaN output.)
+    parties.forEach(party => {
+        party.score = 0;
     });
+}
 
-    //pulls parties and the score and puts them shows them onto the end page 
+function getResults() {
+    //pulls parties and the score and shows them onto the end page 
     for (z = 0; z < parties.length - 1; z++) {
         var p = document.createElement("p");
         var s = document.createElement("p");
@@ -159,13 +153,39 @@ function end() {
         parties.sort(function (a, b) {
             return b.score - a.score;
         });
-
-        
     }
+}
 
+function createReturnButton() {
+    //return to questions button on the end page
+    var returnButton = document.createElement("button");
+    returnButton.innerHTML = "return to questions";
+    returnButton.setAttribute("id", "returnButton");
+    endbutton_container.appendChild(returnButton);
+
+    returnButton.addEventListener("click", function () {
+        returnToQuestions();
+    });
+}
+
+function scoreCalculation() {
+    // loops through the parties in subjects
+    // then takes the name and looks for it in the parties array
+    for (let i = 0; i < subjects.length; i++) {
+        // looks for the name in the party array and if the name is found it ads a point to that party
+        // the (if) is a filter for the answer
+        for (let p = 0; p < subjects[i].parties.length - 1; p++) {
+            var party = parties.find(a => a.name == subjects[i].parties[p].name);
+            if (subjects[i].parties[p].position == answer[i]) {
+                party.score = party.score + 1;
+            }
+        }
+    }
 }
 
 function returnToQuestions() {
+    getContainer();
+
     question_container.style.display = "block";
     end_container.style.display = "none";
 
@@ -175,19 +195,19 @@ function returnToQuestions() {
     text_container.innerHTML = "";
 }
 
-function rendercheck() {
+function renderResults() {
     //end is subjects.length-1
-    if (counter == subjects.length-1) {
+    if (counter == subjects.length - 1) {
         question_container.style.display = "none";
         end_container.style.display = "block";
-        end();
+        ResultPage();
         return;
     }
     counter++;
-    render();
+    renderText();
 }
 
-function render() {
+function renderText() {
     h1.innerHTML = subjects[counter].title;
     p.innerHTML = subjects[counter].statement;
 }
