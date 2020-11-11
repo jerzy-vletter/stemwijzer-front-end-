@@ -11,6 +11,7 @@ function getContainer() {
     var end_container = document.getElementById("end_container");
     var text_container = document.getElementById("text_container");
     var endbutton_container = document.getElementById("endbutton_container");
+    var vote_weighting_container = document.getElementById("vote_weighting_container");
 };
 //makes the start page appear
 function RenderStartPage() {
@@ -26,7 +27,6 @@ function renderQuestionPage() {
     question_container.style.display = "block";
     start_container.style.display = "none";
 }
-
 
 //here is where the startpage code begins
 function startPage() {
@@ -83,17 +83,17 @@ function questionPage() {
 
     but1.addEventListener("click", function () {
         answer.push("pro");
-        renderResults();
+        renderWeight();
     });
 
     but2.addEventListener("click", function () {
         answer.push("none");
-        renderResults();
+        renderWeight();
     });
 
     but3.addEventListener("click", function () {
         answer.push("contra");
-        renderResults();
+        renderWeight();
     });
 
     but4.addEventListener("click", function () {
@@ -105,7 +105,7 @@ function questionPage() {
 
     but5.addEventListener("click", function () {
         answer.push("skipped");
-        renderResults();
+        renderWeight();
     });
 }
 questionPage();
@@ -195,19 +195,42 @@ function returnToQuestions() {
     text_container.innerHTML = "";
 }
 
-function renderResults() {
+function voteWeightingPage() {
+    var checkBox_container = document.getElementById("checkBox_container");
+
+    createCheckBoxes();
+
+    
+}
+
+function renderWeight() {
     //end is subjects.length-1
     if (counter == subjects.length - 1) {
         question_container.style.display = "none";
-        end_container.style.display = "block";
-        ResultPage();
+        vote_weighting_container.style.display = "block";
+        voteWeightingPage();
         return;
     }
     counter++;
     renderText();
 }
 
+function renderResults() {
+    vote_weighting_container.style.display = "none";
+    end_container.style.display = "block";
+    ResultPage();
+}
+
 function renderText() {
     h1.innerHTML = subjects[counter].title;
     p.innerHTML = subjects[counter].statement;
+}
+
+function createCheckBoxes() {
+    var checkBox_container = document.getElementById("checkBox_container");
+
+    for (let m = 1; m < subjects[m].length; m++) {
+        var cb = document.getElementById("cB" + [m]);
+        checkBox_container.appendChild(cb)
+    } 
 }
