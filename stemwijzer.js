@@ -197,10 +197,8 @@ function returnToQuestions() {
 }
 
 function voteWeightingPage() {
-
-    var question_container = document.getElementById("question_container");
-    var content_container = document.getElementById("content_container");
-    var button_container = document.getElementById("button_container");
+    getContainer();
+  
     createCheckBoxes();
     createReturnButton();
     
@@ -234,7 +232,8 @@ function createCheckBoxes() {
         for (let m = 1; m <= 30; m++) {
             var createCheckBox = document.createElement("INPUT");
             createCheckBox.setAttribute("type", "checkbox");
-            createCheckBox.setAttribute("name", "cb" + m);
+            createCheckBox.setAttribute("id", "cb" + m);
+            createCheckBox.setAttribute("label", subjects[m].title);
            
 
             checkBox_container.appendChild(createCheckBox);
@@ -244,4 +243,6 @@ function createCheckBoxes() {
     else {
         return;
     }
+
+    
 }

@@ -44,11 +44,12 @@
     float: left;
 }
 
-#cB1, #cB2, #cB3, #cB4, #cB5, #cB6, #cB7, #cB8, #cB9, #cB10, #cB11, #cB12, #cB13, #cB14, #cB15, #cB16, #cB17, #cB18, #cB19, #cB20, #cB21, #cB22, #cB23, #cB24, #cB25, #cB26, #cB27, #cB28, #cB29, #cB30 {
+#cb1, #cb2, #cb3, #cb4, #cb5, #cb6, #cb7, #cb8, #cb9, #cb10, #cb11, #cb12, #cb13, #cb14, #cb15, #cb16, #cb17, #cb18, #cb19, #cb20, #cb21, #cb22, #cb23, #cb24, #cb25, #cb26, #cb27, #cb28, #cb29, #cb30 {
     margin-top: 7px;
     font-size: 14px;
     display: inline-block;
     float: left;
+    grid-template-columns: 60px 60px;
 }
 
 
