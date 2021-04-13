@@ -1,6 +1,7 @@
 // JavaScript source code
 var counter = 0;
 var answer = []; //this is the answer array, console.log this answers to check if the answer are in there
+var buffer = 0;
 
 //getting all the containers into javascript
 function getContainer() {
@@ -109,6 +110,8 @@ function questionPage() {
         answer.push("skipped");
         renderWeight();
     });
+
+   
 }
 questionPage();
 
@@ -194,7 +197,10 @@ function returnToQuestions() {
 }
 
 function voteWeightingPage() {
-    
+
+    var question_container = document.getElementById("question_container");
+    var content_container = document.getElementById("content_container");
+    var button_container = document.getElementById("button_container");
     createCheckBoxes();
     createReturnButton();
     
@@ -224,5 +230,18 @@ function renderText() {
 }
 
 function createCheckBoxes() {
-   
+    if (buffer == 0) {
+        for (let m = 1; m <= 30; m++) {
+            var createCheckBox = document.createElement("INPUT");
+            createCheckBox.setAttribute("type", "checkbox");
+            createCheckBox.setAttribute("name", "cb" + m);
+           
+
+            checkBox_container.appendChild(createCheckBox);
+            buffer = 1;
+        }
+    }
+    else {
+        return;
+    }
 }
