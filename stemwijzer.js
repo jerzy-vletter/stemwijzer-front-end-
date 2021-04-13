@@ -48,7 +48,9 @@ function createStartButton() {
 
 //here the question part of the stemwijzer begins
 function questionPage() {
-    getContainer();
+    var question_container = document.getElementById("question_container");
+    var content_container = document.getElementById("content_container");
+    var button_container = document.getElementById("button_container");
 
     h1 = document.createElement("h1");
     p = document.createElement("p");
@@ -158,14 +160,9 @@ function getResults() {
 
 function createReturnButton() {
     //return to questions button on the end page
-    var returnButton = document.createElement("button");
-    returnButton.innerHTML = "return to questions";
-    returnButton.setAttribute("id", "returnButton");
-    endbutton_container.appendChild(returnButton);
+    var returnButton = document.getElementById("returnButton");
 
-    returnButton.addEventListener("click", function () {
-        returnToQuestions();
-    });
+    returnButton.display = "block";
 }
 
 function scoreCalculation() {
@@ -187,7 +184,8 @@ function returnToQuestions() {
     getContainer();
 
     question_container.style.display = "block";
-    end_container.style.display = "none";
+    vote_weighting_container.style.display = "none";
+    
 
     //deletes the last answer in the answer array so you don't get extra answer
     answer.pop();
@@ -196,10 +194,9 @@ function returnToQuestions() {
 }
 
 function voteWeightingPage() {
-    var checkBox_container = document.getElementById("checkBox_container");
-
+    
     createCheckBoxes();
-
+    createReturnButton();
     
 }
 
@@ -227,10 +224,5 @@ function renderText() {
 }
 
 function createCheckBoxes() {
-    var checkBox_container = document.getElementById("checkBox_container");
-
-    for (let m = 1; m < subjects[m].length; m++) {
-        var cb = document.getElementById("cB" + [m]);
-        checkBox_container.appendChild(cb)
-    } 
+   
 }
