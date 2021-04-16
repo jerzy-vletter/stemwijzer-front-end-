@@ -201,7 +201,8 @@ function voteWeightingPage() {
   
     createCheckBoxes();
     createReturnButton();
-    
+    createConfirmButton()
+
 }
 
 function renderWeight() {
@@ -246,3 +247,12 @@ function createCheckBoxes() {
 
     
 }
+
+function createConfirmButton() {
+    var ConfirmButton = document.getElementById("confirmButton");
+
+    ConfirmButton.display = "block";
+
+}
+
+
