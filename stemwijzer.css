@@ -44,8 +44,8 @@
     float: left;
 }
 
-#cb1, #cb2, #cb3, #cb4, #cb5, #cb6, #cb7, #cb8, #cb9, #cb10, #cb11, #cb12, #cb13, #cb14, #cb15, #cb16, #cb17, #cb18, #cb19, #cb20, #cb21, #cb22, #cb23, #cb24, #cb25, #cb26, #cb27, #cb28, #cb29, #cb30 {
-    margin-top: 7px;
+.cbs {
+    margin-top: 3px;
     font-size: 14px;
     display: inline-block;
     float: left;

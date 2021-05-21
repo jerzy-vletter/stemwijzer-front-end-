@@ -141,7 +141,11 @@ function resetResults() {
 }
 
 function getResults() {
-    //pulls parties and the score and shows them onto the end page 
+    parties.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    //pulls parties and the score and shows them onto the end page
     for (z = 0; z < parties.length - 1; z++) {
         var p = document.createElement("p");
         var s = document.createElement("p");
@@ -155,9 +159,7 @@ function getResults() {
         text_container.appendChild(p);
         text_container.appendChild(s);
 
-        parties.sort(function (a, b) {
-            return b.score - a.score;
-        });
+        
     }
 }
 
@@ -230,14 +232,21 @@ function renderText() {
 
 function createCheckBoxes() {
     if (buffer == 0) {
-        for (let m = 1; m <= 30; m++) {
+        for (let m = 0; m <= 29; m++) {
             var createCheckBox = document.createElement("INPUT");
             createCheckBox.setAttribute("type", "checkbox");
             createCheckBox.setAttribute("id", "cb" + m);
-            createCheckBox.setAttribute("label", subjects[m].title);
+            createCheckBox.setAttribute("class", "cbs");
+            //createCheckBox.setAttribute("label", subjects[m].title);
+
+            var chbText = document.createElement("p")
+            chbText.innerHTML = subjects[m].title;
+            
+
            
 
             checkBox_container.appendChild(createCheckBox);
+            checkBox_container.appendChild(chbText);
             buffer = 1;
         }
     }
