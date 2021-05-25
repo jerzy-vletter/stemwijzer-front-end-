@@ -20,9 +20,10 @@
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    margin-top: 25px;
 }
 
-#but1, #but2, #but3, #but4, #but5, #startbut, #returnButton, #confirmButton {
+#but1, #but2, #but3, #but4, #but5, #startbut, #returnButton, #confirmButton, #returnButton2, #endStemwijzer {
     display: inline-block;
     background-color: black;
     height: 60px;
@@ -53,9 +54,8 @@
 }
 
 
-#vote_weighting_container {
+#vote_weighting_container, #end_container {
     display: none;
-
 }
 
 #p, #s {
@@ -64,4 +64,8 @@
     float: left;
     grid-template-columns: 60px 60px;
     list-style-type: square;
+}
+
+#checkBox_container, #end_container{
+    column-count: 2;
 }

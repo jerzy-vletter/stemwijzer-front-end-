@@ -1,7 +1,8 @@
 // JavaScript source code
 var counter = 0;
-var answer = []; //this is the answer array, console.log this answers to check if the answer are in there
-var buffer = 0;
+var answer = []; //this is the answer array, console.log this (answers) to check if the answer are in there
+var bufferchb = 0; //this var is used as a control switch for the createCheckBox function. 
+var bufferresults = 0; //this var is used as a control switch for the results page. 
 
 //getting all the containers into javascript
 function getContainer() {
@@ -146,28 +147,39 @@ function getResults() {
     });
 
     //pulls parties and the score and shows them onto the end page
-    for (z = 0; z < parties.length - 1; z++) {
-        var p = document.createElement("p");
-        var s = document.createElement("p");
+    if (bufferresults == 0) {
+        for (z = 0; z < parties.length - 1; z++) {
+            var p = document.createElement("p");
+            var s = document.createElement("p");
 
-        p.innerHTML = parties[z].name;
-        s.innerHTML = parties[z].score;
+            p.innerHTML = parties[z].name;
+            s.innerHTML = parties[z].score;
 
-        p.setAttribute("class", "parties");
-        s.setAttribute("class", "score");
+            p.setAttribute("class", "parties");
+            s.setAttribute("class", "score");
 
-        text_container.appendChild(p);
-        text_container.appendChild(s);
+            text_container.appendChild(p);
+            text_container.appendChild(s);
 
-        
+            bufferresults = 1;
+        }
+    }
+    else {
+        return;
     }
 }
 
 function createReturnButton() {
-    //return to questions button on the end page
+    //return to questions button on the vote wieghting page
     var returnButton = document.getElementById("returnButton");
 
     returnButton.display = "block";
+
+
+    //return to vote weighting page on the results page
+    var returnButton2 = document.getElementById("returnButton2");
+
+    returnButton2.display = "block";
 }
 
 function scoreCalculation() {
@@ -198,12 +210,22 @@ function returnToQuestions() {
     text_container.innerHTML = "";
 }
 
+function returnToVote() {
+    getContainer();
+
+    vote_weighting_container.style.display = "block";
+    end_container.style.display = "none";
+
+
+};
+
 function voteWeightingPage() {
     getContainer();
   
     createCheckBoxes();
     createReturnButton();
-    createConfirmButton()
+    createConfirmButton();
+    editCssVoteWeightingPage();
 
 }
 
@@ -220,9 +242,9 @@ function renderWeight() {
 }
 
 function renderResults() {
-    vote_weighting_container.style.display = "none";
-    end_container.style.display = "block";
     ResultPage();
+    editCssResultsPage();
+
 }
 
 function renderText() {
@@ -231,23 +253,24 @@ function renderText() {
 }
 
 function createCheckBoxes() {
-    if (buffer == 0) {
+    if (bufferchb == 0) {
         for (let m = 0; m <= 29; m++) {
             var createCheckBox = document.createElement("INPUT");
             createCheckBox.setAttribute("type", "checkbox");
             createCheckBox.setAttribute("id", "cb" + m);
             createCheckBox.setAttribute("class", "cbs");
-            //createCheckBox.setAttribute("label", subjects[m].title);
+           
 
             var chbText = document.createElement("p")
             chbText.innerHTML = subjects[m].title;
+            chbText.setAttribute("id", "chbT" + m);
             
 
            
 
             checkBox_container.appendChild(createCheckBox);
             checkBox_container.appendChild(chbText);
-            buffer = 1;
+            bufferchb = 1;
         }
     }
     else {
@@ -263,5 +286,32 @@ function createConfirmButton() {
     ConfirmButton.display = "block";
 
 }
+
+function editCssVoteWeightingPage() {
+    document.getElementById("chbT0").style.marginTop = "0px"; //this fixes a miss alignment issue when using 2 columns
+    
+}
+
+function editCssResultsPage() {
+    vote_weighting_container.style.display = "none";
+    end_container.style.display = "block";
+    endbutton_container.style.display = "block";
+
+};
+
+function confirmEnd() {
+    var confirmTxT;
+    var confirmResult = confirm("wilt u de stemwijziger eindigen?");
+
+    if (confirmResult == true) {
+        confirmTxT = "bedankt voor het deelnemen aan deze stemwijzer, ik hoop dat u er wijzer van bent geworden."
+        alert(confirmTxT);
+        location.reload();
+    }
+    else {
+        confirmTxT = "neem uw tijd, ik zal op u wachten :)";
+        alert(confirmTxT);
+    }
+};
 
 
