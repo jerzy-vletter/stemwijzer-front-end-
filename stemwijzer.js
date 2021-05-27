@@ -112,7 +112,7 @@ function questionPage() {
         renderWeight();
     });
 
-   
+
 }
 questionPage();
 
@@ -122,7 +122,9 @@ function ResultPage() {
     resetResults();
 
     scoreCalculation();
-    
+
+    checkboxFunction();
+
     //put this in because i became bored with typing it in the console
     console.log(parties);
 
@@ -202,7 +204,7 @@ function returnToQuestions() {
 
     question_container.style.display = "block";
     vote_weighting_container.style.display = "none";
-    
+
 
     //deletes the last answer in the answer array so you don't get extra answer
     answer.pop();
@@ -221,7 +223,7 @@ function returnToVote() {
 
 function voteWeightingPage() {
     getContainer();
-  
+
     createCheckBoxes();
     createReturnButton();
     createConfirmButton();
@@ -242,8 +244,10 @@ function renderWeight() {
 }
 
 function renderResults() {
+
     ResultPage();
     editCssResultsPage();
+
 
 }
 
@@ -254,19 +258,19 @@ function renderText() {
 
 function createCheckBoxes() {
     if (bufferchb == 0) {
-        for (let m = 0; m <= 29; m++) {
+        for (let m = 0; m < subjects.length; m++) {
             var createCheckBox = document.createElement("INPUT");
             createCheckBox.setAttribute("type", "checkbox");
             createCheckBox.setAttribute("id", "cb" + m);
             createCheckBox.setAttribute("class", "cbs");
-           
+
 
             var chbText = document.createElement("p")
             chbText.innerHTML = subjects[m].title;
             chbText.setAttribute("id", "chbT" + m);
-            
 
-           
+
+
 
             checkBox_container.appendChild(createCheckBox);
             checkBox_container.appendChild(chbText);
@@ -277,7 +281,25 @@ function createCheckBoxes() {
         return;
     }
 
-    
+
+}
+
+function checkboxFunction(party) {
+
+    for (let v = 0; v < subjects.length; v++) {
+        if (document.getElementById("cb" + [v]).checked == true) {
+            for (let q = 0; q < subjects[v].parties.length - 1; q++) {
+                var party = parties.find(a => a.name == subjects[v].parties[q].name);
+                if (subjects[v].parties[q].position == answer[v]) {
+
+                    party.score = party.score + 1
+                }
+            }
+        }
+        else {
+            continue;
+        }
+    }
 }
 
 function createConfirmButton() {
@@ -289,7 +311,7 @@ function createConfirmButton() {
 
 function editCssVoteWeightingPage() {
     document.getElementById("chbT0").style.marginTop = "0px"; //this fixes a miss alignment issue when using 2 columns
-    
+
 }
 
 function editCssResultsPage() {
@@ -313,5 +335,3 @@ function confirmEnd() {
         alert(confirmTxT);
     }
 };
-
-
