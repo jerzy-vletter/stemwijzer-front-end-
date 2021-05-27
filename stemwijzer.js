@@ -40,7 +40,7 @@ function startPage() {
 
 function createStartButton() {
     var startbut = document.createElement("button");
-    startbut.innerHTML = "start";
+    startbut.innerHTML = "start de stemwijzer";
     startbut.setAttribute("id", "startbut");
     startbutton_container.appendChild(startbut);
     startbut.addEventListener("click", function () {
