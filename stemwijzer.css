@@ -1,12 +1,9 @@
-﻿body
-{
+﻿body {
     background-image: url("img\'s/background.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
     height: 100vh;
-    
 }
 
 #container {
@@ -20,7 +17,6 @@
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    margin-top: 25px;
 }
 
 #but1, #but2, #but3, #but4, #but5, #startbut, #returnButton, #confirmButton, #returnButton2, #endStemwijzer {
@@ -66,6 +62,6 @@
     list-style-type: square;
 }
 
-#checkBox_container, #end_container{
+#checkBox_container, #end_container {
     column-count: 2;
 }
