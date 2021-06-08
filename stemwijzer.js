@@ -86,35 +86,72 @@ function questionPage() {
 
 
     but1.addEventListener("click", function () {
-        answer.push("pro");
+        answer.splice([counter], 1, "pro");
+        //answer[counter] = "pro"; (dit kan ook, is makkelijker als je maar een entity veranderd)
         renderWeight();
+        checkAnswer();
     });
 
     but2.addEventListener("click", function () {
-        answer.push("none");
+        answer.splice([counter], 1 ,"none");
         renderWeight();
+        checkAnswer();
     });
 
     but3.addEventListener("click", function () {
-        answer.push("contra");
+        answer.splice([counter], 1 ,"contra");
         renderWeight();
+        checkAnswer();
     });
 
     but4.addEventListener("click", function () {
-        answer.pop();
         if (counter == 0) { return; }
         counter--;
         renderText();
+        checkAnswer();
     });
 
     but5.addEventListener("click", function () {
-        answer.push("skipped");
+        answer.splice([counter], 1 ,"skipped");
         renderWeight();
+        checkAnswer();
     });
 
 
 }
 questionPage();
+
+function checkAnswer() { //work in progress, this would turn the corresponding answer that had been given blue.
+
+    document.querySelectorAll("#but1, #but2, #but3, #but5").forEach((element) => { element.style.backgroundColor = "black"; });
+
+
+    switch (answer[counter]) {
+        case "pro":
+            document.getElementById("but1").style.backgroundColor = "#000080";
+           
+            break;
+
+        case "none":
+            document.getElementById("but2").style.backgroundColor = "#000080";
+            
+            break;
+
+        case "contra":
+            document.getElementById("but3").style.backgroundColor = "#000080";
+            
+            break;
+
+        case "skipped":
+            document.getElementById("but5").style.backgroundColor = "#000080";
+            
+            break;
+
+        default:
+            document.querySelectorAll("#but1", "#but2", "#but3", "#but5").forEach((element) => { element.style.backgroundColor = "black"; });
+            break;
+    }
+};
 
 function ResultPage() {
     getContainer();
@@ -207,7 +244,7 @@ function returnToQuestions() {
 
 
     //deletes the last answer in the answer array so you don't get extra answer
-    answer.pop();
+    //answer.pop();
 
     text_container.innerHTML = "";
 }
@@ -335,3 +372,4 @@ function confirmEnd() {
         alert(confirmTxT);
     }
 };
+
