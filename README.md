@@ -5,3 +5,12 @@ herstart met project op 10/9/2020
 29-9-2020 - merge had to happen to fix a bug where i could use my coding software to push a commit to github
 
 25/05/2021 - project has been worked on for about 2 weeks now after a dib in activate, have added a dev branch where i store code that isn't fully working yet so the master brachs stays as a version manager of the sorts, so if i code something that breaks the code in a way that i can't fix i have a backup of stable code
+
+
+17/06/2021  - opdracht nagekeken door tim, buttons voor de vragen zouden via een loop of in html aangemaakt kunnen worden om dry code te vermijden
+			- commends boven de functies met een korte uitleg zodat wat je zoekt makkelijk te vinden is.
+			- maak nog even de primaire en secendaire partijen selectie button / checkboxes / etc.
+			
+			- goede punten, lage zijn goede gescheiden.
+			- klinkt als of hij weet waar hij het over heeft.
+			- goed ingesprongen.

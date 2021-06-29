@@ -3,6 +3,7 @@ var counter = 0;
 var answer = []; //this is the answer array, console.log this (answers) to check if the answer are in there
 var bufferchb = 0; //this var is used as a control switch for the createCheckBox function. 
 var bufferresults = 0; //this var is used as a control switch for the results page. 
+const groteZetels = 8; //
 
 //getting all the containers into javascript
 function getContainer() {
@@ -121,7 +122,7 @@ function questionPage() {
 }
 questionPage();
 
-function checkAnswer() { //work in progress, this would turn the corresponding answer that had been given blue.
+function checkAnswer() { 
 
     document.querySelectorAll("#but1, #but2, #but3, #but5").forEach((element) => { element.style.backgroundColor = "black"; });
 
@@ -292,6 +293,43 @@ function renderText() {
     h1.innerHTML = subjects[counter].title;
     p.innerHTML = subjects[counter].statement;
 }
+
+function partijenSelectie() {
+    getContainer();
+    createSelectieBoxes();
+    
+
+} //work in progress
+
+function createSelectieBoxes() {
+
+    var allePartijenSelectie = document.createElement("input");
+    allePartijenSelectie.setAttribute("type", "checkbox");
+    allePartijenSelectie.setAttribute("id", "apcb");
+    allePartijenSelectie.setAttribute("class", "pcb");
+
+    var gpcbText = document.createElement("p");
+    gpcbText.innerHTML = "Selecteer alle partijen."
+    gpcbText.setAttribute("id", "apcbText");
+
+    var grotePartijenSelectie = document.createElement("input");
+    grotePartijenSelectie.setAttribute("type", "checkbox");
+    grotePartijenSelectie.setAttribute("id", "gpcb");
+    grotePartijenSelectie.setAttribute("class", "pcb");
+
+    var gpcbText = document.createElement("p");
+    gpcbText.innerHTML = "Selecteer alleen de grote partijen."
+    gpcbText.setAttribute("id", "gpcbText");
+
+    var kleinePartijenSelectie = document.createElement("input");
+    kleinePartijenSelectie.setAttribute("type", "checkbox");
+    kleinePartijenSelectie.setAttribute("id", "kpcb");
+    kleinePartijenSelectie.setAttribute("class", "pcb");
+
+    var gpcbText = document.createElement("p");
+    gpcbText.innerHTML = "Selecteer alleen de seculiere partijen."
+    gpcbText.setAttribute("id", "kpcbText");
+} // work in progress
 
 function createCheckBoxes() {
     if (bufferchb == 0) {
