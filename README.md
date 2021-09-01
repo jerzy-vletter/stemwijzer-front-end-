@@ -8,9 +8,13 @@ herstart met project op 10/9/2020
 
 
 17/06/2021  - opdracht nagekeken door tim, buttons voor de vragen zouden via een loop of in html aangemaakt kunnen worden om dry code te vermijden
-			- commends boven de functies met een korte uitleg zodat wat je zoekt makkelijk te vinden is.
+			- comments boven de functies met een korte uitleg zodat wat je zoekt makkelijk te vinden is.
 			- maak nog even de primaire en secendaire partijen selectie button / checkboxes / etc.
 			
 			- goede punten, lage zijn goede gescheiden.
 			- klinkt als of hij weet waar hij het over heeft.
 			- goed ingesprongen.
+
+
+01/09/2021 - transfered the creation of the main set of buttons to the html page
+		   - 

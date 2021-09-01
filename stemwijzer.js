@@ -19,6 +19,7 @@ function getContainer() {
 //makes the start page appear
 function RenderStartPage() {
 
+    counter = 0;
     question_container.style.display = "none";
     start_container.style.display = "block";
     startPage();
@@ -34,19 +35,8 @@ function renderQuestionPage() {
 //here is where the startpage code begins
 function startPage() {
     getContainer();
-
-    createStartButton();
-
-}
-
-function createStartButton() {
-    var startbut = document.createElement("button");
-    startbut.innerHTML = "start de stemwijzer";
-    startbut.setAttribute("id", "startbut");
-    startbutton_container.appendChild(startbut);
-    startbut.addEventListener("click", function () {
-        renderQuestionPage();
-    });
+    
+    var startButton = document.getElementById("startbut");
 }
 
 //here the question part of the stemwijzer begins
@@ -57,70 +47,36 @@ function questionPage() {
 
     h1 = document.createElement("h1");
     p = document.createElement("p");
-    var but1 = document.createElement("button");
-    var but2 = document.createElement("button");
-    var but3 = document.createElement("button");
-    var but4 = document.createElement("button");
-    var but5 = document.createElement("button");
-
-    h1.innerHTML = subjects[counter].title;
-    p.innerHTML = subjects[counter].statement;
-    but1.innerHTML = "eens";
-    but2.innerHTML = "geen mening";
-    but3.innerHTML = "oneens";
-    but4.innerHTML = "<-";
-    but5.innerHTML = "skip";
-
-    but1.setAttribute("id", "but1");
-    but2.setAttribute("id", "but2");
-    but3.setAttribute("id", "but3");
-    but4.setAttribute("id", "but4");
-    but5.setAttribute("id", "but5");
-
+    var agreeButton = document.getElementById("but1");
+    var doubtButton = document.getElementById("but2");
+    var disagreeButton = document.getElementById("but3");
+    var backButton = document.getElementById("but4");
+    var skipButton = document.getElementById("but5");
+   
     content_container.appendChild(h1);
     content_container.appendChild(p);
-    button_container.appendChild(but1);
-    button_container.appendChild(but2);
-    button_container.appendChild(but3);
-    button_container.appendChild(but4);
-    button_container.appendChild(but5);
+    
+    renderText();
+}
+questionPage();
 
+function buttonFunctionality(givenAnswer){
 
-    but1.addEventListener("click", function () {
-        answer.splice([counter], 1, "pro");
-        //answer[counter] = "pro"; (dit kan ook, is makkelijker als je maar een entity veranderd)
-        renderWeight();
-        checkAnswer();
-    });
-
-    but2.addEventListener("click", function () {
-        answer.splice([counter], 1 ,"none");
-        renderWeight();
-        checkAnswer();
-    });
-
-    but3.addEventListener("click", function () {
-        answer.splice([counter], 1 ,"contra");
-        renderWeight();
-        checkAnswer();
-    });
-
-    but4.addEventListener("click", function () {
-        if (counter == 0) { return; }
+    if (givenAnswer == "return"){
+        if (counter == 0){ return; }
         counter--;
         renderText();
         checkAnswer();
-    });
+    }
 
-    but5.addEventListener("click", function () {
-        answer.splice([counter], 1 ,"skipped");
+    else {
+        answer.splice([counter], 1, givenAnswer)
+        renderText();
         renderWeight();
         checkAnswer();
-    });
-
+    }
 
 }
-questionPage();
 
 function checkAnswer() { 
 
@@ -130,22 +86,18 @@ function checkAnswer() {
     switch (answer[counter]) {
         case "pro":
             document.getElementById("but1").style.backgroundColor = "#000080";
-           
             break;
 
         case "none":
             document.getElementById("but2").style.backgroundColor = "#000080";
-            
             break;
 
         case "contra":
             document.getElementById("but3").style.backgroundColor = "#000080";
-            
             break;
 
         case "skipped":
             document.getElementById("but5").style.backgroundColor = "#000080";
-            
             break;
 
         default:
@@ -370,9 +322,6 @@ function checkboxFunction(party) {
                     party.score = party.score + 1
                 }
             }
-        }
-        else {
-            continue;
         }
     }
 }

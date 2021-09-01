@@ -1,17 +1,21 @@
-﻿<
+﻿
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <link href="stemwijzer.css" rel="stylesheet" />
     <title>stemwijzer</title>
 </head>
+
 <body onload="RenderStartPage()">
     <div id="container">
         <div id="start_container">
             <h1>welkom bij deze stemwijzer</h1>
-            <div id="startbutton_container"></div>
+            <div id="startbutton_container">
+                <button id="startbut" type="button" onclick="renderQuestionPage()">start de stemwijzer</button>
+            </div>
 
         </div>
         <div id="question_container">
@@ -19,6 +23,11 @@
 
             </div>
             <div id="button_container">
+                <button id="but1" type="button" onclick="buttonFunctionality('pro')">eens</button>
+                <button id="but2" type="button" onclick="buttonFunctionality('none')">geen mening</button>
+                <button id="but3" type="button" onclick="buttonFunctionality('contra')">oneens</button>
+                <button id="but4" type="button" onclick="buttonFunctionality('return')"><-</button>
+                <button id="but5" type="button" onclick="buttonFunctionality('skipped')">skip</button>
 
             </div>
         </div>
