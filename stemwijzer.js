@@ -15,6 +15,8 @@ function getContainer() {
     var text_container = document.getElementById("text_container");
     var endbutton_container = document.getElementById("endbutton_container");
     var vote_weighting_container = document.getElementById("vote_weighting_container");
+    var partijenSelectie_container = document.getElementById("partijenSelectie_container");
+    var Selectie_container = document.getElementById("Selectie_container");
 };
 //makes the start page appear
 function RenderStartPage() {
@@ -141,6 +143,7 @@ function getResults() {
     //pulls parties and the score and shows them onto the end page
     if (bufferresults == 0) {
         for (z = 0; z < parties.length - 1; z++) {
+            
             var p = document.createElement("p");
             var s = document.createElement("p");
 
@@ -248,40 +251,10 @@ function renderText() {
 
 function partijenSelectie() {
     getContainer();
-    createSelectieBoxes();
+    
     
 
 } //work in progress
-
-function createSelectieBoxes() {
-
-    var allePartijenSelectie = document.createElement("input");
-    allePartijenSelectie.setAttribute("type", "checkbox");
-    allePartijenSelectie.setAttribute("id", "apcb");
-    allePartijenSelectie.setAttribute("class", "pcb");
-
-    var gpcbText = document.createElement("p");
-    gpcbText.innerHTML = "Selecteer alle partijen."
-    gpcbText.setAttribute("id", "apcbText");
-
-    var grotePartijenSelectie = document.createElement("input");
-    grotePartijenSelectie.setAttribute("type", "checkbox");
-    grotePartijenSelectie.setAttribute("id", "gpcb");
-    grotePartijenSelectie.setAttribute("class", "pcb");
-
-    var gpcbText = document.createElement("p");
-    gpcbText.innerHTML = "Selecteer alleen de grote partijen."
-    gpcbText.setAttribute("id", "gpcbText");
-
-    var kleinePartijenSelectie = document.createElement("input");
-    kleinePartijenSelectie.setAttribute("type", "checkbox");
-    kleinePartijenSelectie.setAttribute("id", "kpcb");
-    kleinePartijenSelectie.setAttribute("class", "pcb");
-
-    var gpcbText = document.createElement("p");
-    gpcbText.innerHTML = "Selecteer alleen de seculiere partijen."
-    gpcbText.setAttribute("id", "kpcbText");
-} // work in progress
 
 function createCheckBoxes() {
     if (bufferchb == 0) {

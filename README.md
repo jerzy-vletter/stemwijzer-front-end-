@@ -17,4 +17,11 @@ herstart met project op 10/9/2020
 
 
 01/09/2021 - transfered the creation of the main set of buttons to the html page
-		   - 
+		   - bug fixing
+
+
+07/09/2021	- to do, maak de functie createSelectieBoxes() in html om dry code te voorkomen
+				- maak een pagina waar deze selectie kan plaatsvinden
+				- zorg voor goede spacing of de pagina zodat het er nog een beetje okay uitziet
+				- rework volgorde waar nodig
+			

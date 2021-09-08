@@ -50,7 +50,7 @@
 }
 
 
-#vote_weighting_container, #end_container {
+#vote_weighting_container, #end_container, #partijenSelectie_container {
     display: none;
 }
 
