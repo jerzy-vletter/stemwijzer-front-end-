@@ -1,9 +1,13 @@
 // JavaScript source code
 var counter = 0;
 var answer = []; //this is the answer array, console.log this (answers) to check if the answer are in there
+var partyResults = []; //this is the array where the results get filtered trough.
 var bufferchb = 0; //this var is used as a control switch for the createCheckBox function. 
-var bufferresults = 0; //this var is used as a control switch for the results page. 
-const groteZetels = 8; //
+var bufferresults = 0; //this var is used as a control switch for the results page.
+var partySelection = 0; //a variable for the selection process. 
+const groteZetels = 8; 
+
+but1.onclick = function() { buttonFunctionality('pro') }
 
 //getting all the containers into javascript
 function getContainer() {
@@ -54,6 +58,12 @@ function questionPage() {
     var disagreeButton = document.getElementById("but3");
     var backButton = document.getElementById("but4");
     var skipButton = document.getElementById("but5");
+
+    agreeButton.onclick = function() { buttonFunctionality('pro') }
+    doubtButton.onclick = function() { buttonFunctionality('none') }
+    disagreeButton.onclick = function() { buttonFunctionality('contra') }
+    backButton.onclick = function() { buttonFunctionality('return') }
+    skipButton.onclick = function() { buttonFunctionality('skipped') }
    
     content_container.appendChild(h1);
     content_container.appendChild(p);
@@ -109,6 +119,8 @@ function checkAnswer() {
 };
 
 function ResultPage() {
+console.log(partySelection)
+
     getContainer();
 
     resetResults();
@@ -117,15 +129,14 @@ function ResultPage() {
 
     checkboxFunction();
 
-    //put this in because i became bored with typing it in the console
-    console.log(parties);
-
     //clears the endbutton container so no dublicate buttons get created when going back to the questions.
     endbutton_container.innerHTML = "";
 
     createReturnButton();
 
     getResults();
+
+    
 }
 
 function resetResults() {
@@ -142,21 +153,63 @@ function getResults() {
 
     //pulls parties and the score and shows them onto the end page
     if (bufferresults == 0) {
-        for (z = 0; z < parties.length - 1; z++) {
-            
-            var p = document.createElement("p");
-            var s = document.createElement("p");
+        if (partySelection == 0) {
+            for (z = 0; z < parties.length - 1; z++) {
+                
+                var p = document.createElement("p");
+                var s = document.createElement("p");
 
-            p.innerHTML = parties[z].name;
-            s.innerHTML = parties[z].score;
+                p.innerHTML = parties[z].name;
+                s.innerHTML = parties[z].score;
 
-            p.setAttribute("class", "parties");
-            s.setAttribute("class", "score");
+                p.setAttribute("class", "parties");
+                s.setAttribute("class", "score");
 
-            text_container.appendChild(p);
-            text_container.appendChild(s);
+                text_container.appendChild(p);
+                text_container.appendChild(s);
 
-            bufferresults = 1;
+                bufferresults = 1;
+            }
+        }
+        else if (partySelection == 1) {
+            for (z = 0; z < parties.length - 1; z++) {
+                const partyResults = parties.filter(secular == false)
+
+                var p = document.createElement("p");
+                var s = document.createElement("p");
+
+                p.innerHTML = parties[z].name;
+                s.innerHTML = parties[z].score;
+
+                p.setAttribute("class", "parties");
+                s.setAttribute("class", "score");
+
+                text_container.appendChild(p);
+                text_container.appendChild(s);
+
+                bufferresults = 1;
+                console.log(partyResults)
+            }
+        }
+        else if (partySelection == 2) {
+            for (z = 0; z < parties.length - 1; z++) {
+                parties.filter(secular == true)
+
+                var p = document.createElement("p");
+                var s = document.createElement("p");
+
+                p.innerHTML = parties[z].name;
+                s.innerHTML = parties[z].score;
+
+                p.setAttribute("class", "parties");
+                s.setAttribute("class", "score");
+
+                text_container.appendChild(p);
+                text_container.appendChild(s);
+
+                bufferresults = 1;
+                console.log(p, s)
+            }
         }
     }
     else {
@@ -168,6 +221,8 @@ function createReturnButton() {
     //return to questions button on the vote wieghting page
     var returnButton = document.getElementById("returnButton");
 
+    returnButton.onclick = function() { returnToQuestions() }
+
     returnButton.display = "block";
 
 
@@ -175,6 +230,8 @@ function createReturnButton() {
     var returnButton2 = document.getElementById("returnButton2");
 
     returnButton2.display = "block";
+
+    returnButton2.onclick = function() { returnToVote() }
 }
 
 function scoreCalculation() {
@@ -198,7 +255,7 @@ function returnToQuestions() {
     question_container.style.display = "block";
     vote_weighting_container.style.display = "none";
 
-
+    
     //deletes the last answer in the answer array so you don't get extra answer
     //answer.pop();
 
@@ -238,8 +295,12 @@ function renderWeight() {
 
 function renderResults() {
 
+    partijenSelectie_container.style.display = "none";
+    end_container.style.display = "block";
+
     ResultPage();
     editCssResultsPage();
+
 
 
 }
@@ -249,12 +310,24 @@ function renderText() {
     p.innerHTML = subjects[counter].statement;
 }
 
-function partijenSelectie() {
-    getContainer();
+function renderPartijenSelectie() {
     
     
+    vote_weighting_container.style.display = "none";
+    partijenSelectie_container.style.display = "block";
+    partijSelectiePage();
 
-} //work in progress
+}
+
+function partijSelectiePage() {
+    getContainer();
+
+    allePartijenBut.onclick = function() { renderResults(), partySelection = 0 };
+    zittendePartijenBut.onclick = function() { renderResults(), partySelection = 1 };
+    seculierePartijenBut.onclick = function() { renderResults(), partySelection = 2 };
+
+    
+}
 
 function createCheckBoxes() {
     if (bufferchb == 0) {
@@ -303,6 +376,8 @@ function createConfirmButton() {
     var ConfirmButton = document.getElementById("confirmButton");
 
     ConfirmButton.display = "block";
+
+    ConfirmButton.onclick = function() { renderPartijenSelectie() }
 
 }
 
