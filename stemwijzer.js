@@ -121,6 +121,8 @@ function checkAnswer() {
 };
 
 function ResultPage() {
+    text_container.innerHTML = "";
+    bufferresults = 0;
 
     getContainer();
 
@@ -153,11 +155,11 @@ function filterParties() {
 
 
     if(partySelection == 1) {
-        partiesToShow = parties.filter(parties => parties.secular = false);
+        partiesToShow = parties.filter(parties => parties.secular == true);
         console.log(partiesToShow);
     }
     else if (partySelection == 2) {
-        partiesToShow = parties.filter(parties => parties.secular = true);
+        partiesToShow = parties.filter(parties => parties.secular == false);
         console.log(partiesToShow);
     }
     else {
@@ -200,6 +202,8 @@ function getResults() {
 
 function createReturnButton() {
     //return to questions button on the vote wieghting page
+    getContainer();
+
     var returnButton = document.getElementById("returnButton");
 
     returnButton.onclick = function() { returnToQuestions() }
@@ -236,10 +240,6 @@ function returnToQuestions() {
     question_container.style.display = "block";
     vote_weighting_container.style.display = "none";
 
-    
-    //deletes the last answer in the answer array so you don't get extra answer
-    //answer.pop();
-
     text_container.innerHTML = "";
 }
 
@@ -249,7 +249,7 @@ function returnToVote() {
     vote_weighting_container.style.display = "block";
     end_container.style.display = "none";
 
-
+    
 };
 
 function voteWeightingPage() {
@@ -281,8 +281,7 @@ function renderResults() {
 
     ResultPage();
     editCssResultsPage();
-
-
+    createReturnButton()
 
 }
 
