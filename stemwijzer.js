@@ -1,10 +1,12 @@
 // JavaScript source code
 var counter = 0;
 var answer = []; //this is the answer array, console.log this (answers) to check if the answer are in there
-var partyResults = []; //this is the array where the results get filtered trough.
+var utilityArray = []; // utility array
+var partiesToShow = []; //this is the array where the results get filtered trough.
 var bufferchb = 0; //this var is used as a control switch for the createCheckBox function. 
 var bufferresults = 0; //this var is used as a control switch for the results page.
-var partySelection = 0; //a variable for the selection process. 
+var partySelection = 0; //a variable for the party selection process. 
+var sortingProcess = 0; //a variable for the party selection process.
 const groteZetels = 8; 
 
 but1.onclick = function() { buttonFunctionality('pro') }
@@ -119,7 +121,6 @@ function checkAnswer() {
 };
 
 function ResultPage() {
-console.log(partySelection)
 
     getContainer();
 
@@ -134,6 +135,8 @@ console.log(partySelection)
 
     createReturnButton();
 
+    filterParties();
+
     getResults();
 
     
@@ -146,70 +149,48 @@ function resetResults() {
     });
 }
 
+function filterParties() {
+
+
+    if(partySelection == 1) {
+        partiesToShow = parties.filter(parties => parties.secular = false);
+        console.log(partiesToShow);
+    }
+    else if (partySelection == 2) {
+        partiesToShow = parties.filter(parties => parties.secular = true);
+        console.log(partiesToShow);
+    }
+    else {
+        partiesToShow = utilityArray.concat(parties);
+    }
+}
+
 function getResults() {
-    parties.sort(function (a, b) {
-        return b.score - a.score;
-    });
+    
+        partiesToShow.sort(function (a, b) {
+            return b.score - a.score;
+        });
+
+
+    
 
     //pulls parties and the score and shows them onto the end page
     if (bufferresults == 0) {
-        if (partySelection == 0) {
-            for (z = 0; z < parties.length - 1; z++) {
-                
-                var p = document.createElement("p");
-                var s = document.createElement("p");
+        for (z = 0; z < partiesToShow.length; z++) {
+            
+            var p = document.createElement("p");
+            var s = document.createElement("p");
 
-                p.innerHTML = parties[z].name;
-                s.innerHTML = parties[z].score;
+            p.innerHTML = partiesToShow[z].name;
+            s.innerHTML = partiesToShow[z].score;
 
-                p.setAttribute("class", "parties");
-                s.setAttribute("class", "score");
+            p.setAttribute("class", "parties");
+            s.setAttribute("class", "score");
 
-                text_container.appendChild(p);
-                text_container.appendChild(s);
+            text_container.appendChild(p);
+            text_container.appendChild(s);
 
-                bufferresults = 1;
-            }
-        }
-        else if (partySelection == 1) {
-            for (z = 0; z < parties.length - 1; z++) {
-                const partyResults = parties.filter(secular == false)
-
-                var p = document.createElement("p");
-                var s = document.createElement("p");
-
-                p.innerHTML = parties[z].name;
-                s.innerHTML = parties[z].score;
-
-                p.setAttribute("class", "parties");
-                s.setAttribute("class", "score");
-
-                text_container.appendChild(p);
-                text_container.appendChild(s);
-
-                bufferresults = 1;
-                console.log(partyResults)
-            }
-        }
-        else if (partySelection == 2) {
-            for (z = 0; z < parties.length - 1; z++) {
-                parties.filter(secular == true)
-
-                var p = document.createElement("p");
-                var s = document.createElement("p");
-
-                p.innerHTML = parties[z].name;
-                s.innerHTML = parties[z].score;
-
-                p.setAttribute("class", "parties");
-                s.setAttribute("class", "score");
-
-                text_container.appendChild(p);
-                text_container.appendChild(s);
-
-                bufferresults = 1;
-                console.log(p, s)
-            }
+            bufferresults = 1;
         }
     }
     else {
@@ -322,9 +303,9 @@ function renderPartijenSelectie() {
 function partijSelectiePage() {
     getContainer();
 
-    allePartijenBut.onclick = function() { renderResults(), partySelection = 0 };
-    zittendePartijenBut.onclick = function() { renderResults(), partySelection = 1 };
-    seculierePartijenBut.onclick = function() { renderResults(), partySelection = 2 };
+    allePartijenBut.onclick = function() { partySelection = 0, renderResults() };
+    zittendePartijenBut.onclick = function() {partySelection = 1, renderResults() };
+    seculierePartijenBut.onclick = function() {partySelection = 2, renderResults() };
 
     
 }
