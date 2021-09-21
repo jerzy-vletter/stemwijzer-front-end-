@@ -64,5 +64,12 @@
 
 #checkBox_container, #end_container {
     column-count: 2;
-    
+    height: 650px;
 }
+
+#returnButton, #confirmButton {
+    margin-bottom: 50px;
+}
+
+
+
