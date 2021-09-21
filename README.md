@@ -24,4 +24,6 @@ herstart met project op 10/9/2020
 				- maak een pagina waar deze selectie kan plaatsvinden
 				- zorg voor goede spacing of de pagina zodat het er nog een beetje okay uitziet
 				- rework volgorde waar nodig
+
+21/09/2021 - project finished after ironing out the last little bugs / exessive code.
 			

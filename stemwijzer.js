@@ -9,7 +9,7 @@ var partySelection = 0; //a variable for the party selection process.
 var sortingProcess = 0; //a variable for the party selection process.
 const groteZetels = 8; 
 
-but1.onclick = function() { buttonFunctionality('pro') }
+
 
 //getting all the containers into javascript
 function getContainer() {
@@ -195,9 +195,6 @@ function getResults() {
             bufferresults = 1;
         }
     }
-    else {
-        return;
-    }
 }
 
 function createReturnButton() {
@@ -217,6 +214,14 @@ function createReturnButton() {
     returnButton2.display = "block";
 
     returnButton2.onclick = function() { returnToVote() }
+}
+
+function createEndButton() {
+    var endStemwijzer = document.getElementById("endStemwijzer");
+
+    endStemwijzer.display = "block";
+
+    endStemwijzer.onclick = function() { confirmEnd() }
 }
 
 function scoreCalculation() {
@@ -281,7 +286,8 @@ function renderResults() {
 
     ResultPage();
     editCssResultsPage();
-    createReturnButton()
+    createReturnButton();
+    createEndButton();
 
 }
 
